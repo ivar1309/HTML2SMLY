@@ -4,8 +4,6 @@
 
 Lokaverkefni í námskeiðinu STÆ532M í Háskóla Íslands. Ég valdi verkefnið að geyma vefsíðu á bálkakeðju og fór ég þá leið að geyma vefsíðuna bókstaflega á bálkakeðjunni.
 
-![](header.png)
-
 ## Uppsetning
 
 ```sh
