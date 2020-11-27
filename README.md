@@ -51,11 +51,11 @@ sjá dæmi um síðu á [bálkaskoðara][blocks] annars vegar og [Flask þjón][
 
 ## Tæknileg lýsing
 
-Umritunin fer þannig fram að fyrst er búið til veskisfang sem verður vísun í vefsíðuna. Því næst er html kóðinn umritaður fjögur tákn í senn yfir í upphæð í SMLY sem sett er í færslu undirritaðri af einkalykli viðkomandi. Færslunni er síðan gefið raðnúmer til að halda röðinni réttri við aflestur síðar. Loks er færslan send út á bálkakeðjuna.
+Umritunin fer þannig fram að fyrst er búið til veskisfang sem verður vísun í vefsíðuna. Því næst er html kóðinn umritaður, fjögur tákn í senn yfir í upphæð í SMLY, sem sett er í færslu undirritaðri af einkalykli viðkomandi. Færslunni er síðan gefið raðnúmer til að halda röðinni réttri við aflestur síðar. Loks er færslan send út á bálkakeðjuna.
 
-Umritunin úr html yfir í SMLY notast við [ASCII][asciitable] töfluna. Tákn er lesið inn, flett uppí töflunni tugakerfisgildinu og frá því svo dregið talan 31. Ástæðan fyrir því er sú að prentanlegir stafir liggja á bilinu 32-126 en til að geta umritað fjóra stafi í upphæð færslu þá má hver stafur ekki vera hærri en 99. þannig að frádráttur 31 gefur númer á hvert prentanlegt tákn frá 1-95.
+Umritunin úr html yfir í SMLY notast við [ASCII][asciitable] töfluna. Tákn er lesið inn, flett upp í töflunni tugakerfisgildinu og frá því svo dregið talan 31. Ástæðan fyrir því er sú að prentanlegir stafir liggja á bilinu 32-126 en til að geta umritað fjóra stafi í upphæð færslu þá má hver stafur ekki vera hærri en 99. Þannig að frádráttur 31 gefur númer á hvert prentanlegt tákn frá 1-95.
 
-Notast er við forritasöfn sem hjálpa til við stærðfræðilega hlið þess að útbúa einka- og opinberra lykla. Fyrst eru fengnir 256 bitar frá slembitöluúttaki stýrikerfisins sem verður einkalykillinn. Hann er síðan margfaldaður við punkt á sporgera ferlinum [secp256k1][ecurve]. Þá höfum við tvennd sem eru hnit á ferlinum sem standa fyrir opinbera lyklinum.
+Notast er við forritasöfn sem hjálpa til við stærðfræðilega hlið þess að útbúa einka- og opinbera lykla. Fyrst eru fengnir 256 bitar frá slembitöluúttaki stýrikerfisins sem verður einkalykillinn. Hann er síðan margfaldaður við punkt á sporgera ferlinum [secp256k1][ecurve]. Þá höfum við tvennd, sem eru hnit á ferlinum, sem standa fyrir opinbera lykilinn.
 
 Því næst þarf að beyta tætiföllunum [sha256][sha256] og [ripemd160][ripemd160] á opinbera lykilinn. Þá fæst svokallað "payload". Skeyta þarf framan við það útgáfunúmeri bálkakeðjunar og beyta [sha256][sha256] tvisvar á útkomuna. Þá höfum við það sem kallað er "checksum". Síðast er svo útgáfunúmerinu, "payload" og "checksum" skeytt saman og sent í umritun yfir í [base58check][base58]. Þá loks höfum við veskisfang.
 
@@ -78,7 +78,7 @@ og út-færsla er:
 
 1. upphæð færslu.
 2. lengd pubkey skriftu (pubKeyScript).
-3. pubkey skifta.
+3. pubkey skrifta.
 
 ###### t.d.
 
@@ -91,12 +91,14 @@ og út-færsla er:
 00000000
 ```
 
-Næst þarf að undirrita færsluna. Þá er færslan eins og hún er núna tekin og skeytt aftan við hana tegund tætingar (01000000) og svo beytt á hana **sha256** tvisvar sinnum. Því næst er einkalykillinn notaður til að undirita útkomuna. Þá höfum við undirskrift sem við endan bætist 01. Síðan þarf að útbúa skriftuna sem er samskeyting lendar á undirskrift, undirskrift, lengdar á opinberum lykli og loks opinberum lykli. Nú höfum við "scriptSig".
+Næst þarf að undirrita færsluna. Þá er færslan eins og hún er núna tekin og skeytt aftan við hana tegund tætingar (01000000) og svo beytt á hana **sha256** tvisvar sinnum. Því næst er einkalykillinn notaður til að undirrita útkomuna. Þá höfum við undirskrift sem við endan bætist 01. Síðan þarf að útbúa skriftuna sem er samskeyting lengdar á undirskrift, undirskrift, lengdar á opinberum lykli og loks opinberum lykli. Nú höfum við "scriptSig".
 
 Að lokum þarf að útbúa færsluna aftur en skipta þá út 4. liðnum í upphaflegu færlunni með "scriptSig" og svo senda útkomuna út á bálkakeðjuna.
 
 Allar aðgerðir á bálkakeðjuni eru framkvæmdar í gegnum "api" sem hefur slóðina: https://blocks.smileyco.in/api/
-Endinn **/addr/ADDRESS/utxo** til að sækja færslur sem á að eyða í umritunina. Og endinn **/tx/send** til að senda færslur á keðjuna.
+
+- Endinn **/addr/ADDRESS/utxo** til að sækja færslur sem á að eyða í umritunina.
+- Og endinn **/tx/send** til að senda færslur á keðjuna.
 
 Sjá [SMLY API][smlyapi] fyrir frekari upplýsingar.
 
