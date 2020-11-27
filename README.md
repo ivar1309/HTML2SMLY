@@ -95,10 +95,10 @@ Næst þarf að undirrita færsluna. Þá er færslan eins og hún er núna teki
 
 Að lokum þarf að útbúa færsluna aftur en skipta þá út 4. liðnum í upphaflegu færlunni með "scriptSig" og svo senda útkomuna út á bálkakeðjuna.
 
-Allar aðgerðir á bálkakeðjuni eru framkvæmdar í gegnum "api" sem hefur slóðina: https://blocks.smileyco.in/api/
+Allar aðgerðir á bálkakeðjuni eru framkvæmdar í gegnum "api" sem hefur slóðina: https://blocks.smileyco.in/api
 
-- Endinn **/addr/ADDRESS/utxo** til að sækja færslur sem á að eyða í umritunina.
-- Og endinn **/tx/send** til að senda færslur á keðjuna.
+- **/addr/ADDRESS/utxo** til að sækja færslur sem á að eyða í umritunina.
+- **/tx/send** til að senda færslur á keðjuna.
 
 Sjá [SMLY API][smlyapi] fyrir frekari upplýsingar.
 
