@@ -1,0 +1,7 @@
+tx.smly
+track.txt
+bin/
+include/
+lib/
+pyvenv.cfg
+__pycache__
