@@ -10,6 +10,7 @@ Lokaverkefni í námskeiðinu STÆ532M í Háskóla Íslands. Ég valdi verkefni
 git clone https://github.com/ivar1309/HTML2SMLY.git
 cd HTML2SMLY
 python -m venv .
+source ./bin/activate
 pip install -r requirements.txt
 ```
 
