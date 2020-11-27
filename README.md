@@ -45,6 +45,12 @@ To spend them and therefore erase the HTML use this private key
 Private Key: EINKALYKILL
 ```
 
+Hægt er að fá einkalykil, opinberan lykil og veskisfang án þess að umrita vefsíðu með því að keyra:
+
+```sh
+python Address.py
+```
+
 Skráin Server.py inniheldur lítin Flask vefþjón sem les af SMLY bálkakeðjunni og umritar aftur yfir í html og birtir.
 
 sjá dæmi um síðu á [bálkaskoðara][blocks] annars vegar og [Flask þjón][heroku] hins vegar.
